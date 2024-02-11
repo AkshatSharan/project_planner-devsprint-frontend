@@ -87,7 +87,7 @@ function DashboardHeader() {
           <IoIosNotificationsOutline />
         </DivIconNotification>
         <DivAvatar>
-            <img 
+            
         </DivAvatar>
       </DivCTA>
     </Header>

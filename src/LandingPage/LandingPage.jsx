@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../App.css";
+import { useNavigate } from 'react-router-dom';
 import "./landingpagestyle.css";
 import Navbar from "../Navbar/Navbar";
 import Spline from "@splinetool/react-spline";
@@ -7,6 +8,7 @@ import AuthComponent from "../AuthComponent/AuthComponent";
 
 function LandingPage() {
   const [dataTheme, setDataTheme] = useState("dark");
+  const history = useNavigate()
 
   const toggleAppearance = () => {
     setDataTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
@@ -19,6 +21,13 @@ function LandingPage() {
     console.log(showAuth);
   };
 
+  const handleAuthSuccess = () => {
+    // Perform any additional actions after successful authentication
+
+    // Redirect to the dashboard page
+    history('/dashboard');
+  };
+
   return (
     <div id="app" data-theme={dataTheme}>
       <Navbar
@@ -26,7 +35,7 @@ function LandingPage() {
         dataTheme={dataTheme}
         handleAuthDisplay={handleAuthDisplay}
       />
-      {showAuth && <AuthComponent handleAuthDisplay={handleAuthDisplay} />}
+      {showAuth && <AuthComponent handleAuthDisplay={handleAuthDisplay} onSuccess={handleAuthSuccess} />}
       <Spline scene="https://prod.spline.design/wl5PgB0SzoixftDZ/scene.splinecode" />
       {/* <section className='landing-main'> */}
       <div className="landing-left">
@@ -38,7 +47,6 @@ function LandingPage() {
           before!
         </p>
       </div>
-      <div className="landing-right"></div>
       {/* </section> */}
     </div>
   );
